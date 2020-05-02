@@ -26,11 +26,11 @@ When to use this test?
 
 *Notes taken from here:https://www.youtube.com/watch?v=WOoS7nVkfDk by Matthew E.Clapham
 
-*Type of Data*: Categorial, only have two categories in a single sample
+**Type of Data**: Categorial, only have two categories in a single sample
 
-*Purpose*: To test if Category has an expected count(Goodness of fit).
+**Purpose**: To test if Category has an expected count(Goodness of fit).
 
-The *goodness of fit* of a statistical model describes how well it fits a set of observations. Measures of goodness of fit typically summarize the discrepancy between observed values and the values expected under the model in question.
+The **goodness of fit** of a statistical model describes how well it fits a set of observations. Measures of goodness of fit typically summarize the discrepancy between observed values and the values expected under the model in question.
 
 
 ```{r setup}
@@ -56,7 +56,7 @@ xt = xtabs( ~ Y, data=df) # make counts
 
 binom.test 
 
-Exact Binomial Test
+**Exact Binomial Test**
 Performs an exact test of a simple null hypothesis about the probability of success in a Bernoulli experiment.
 https://www.rdocumentation.org/packages/stats/versions/3.1.1/topics/binom.test
 
@@ -66,9 +66,9 @@ binom.test(xt, p=0.5, alternative="two.sided")
 
 
 ### Multinomial test
-*Type of Data*: Categorial, 3+ categories in a single sample
+**Type of Data**: Categorial, 3+ categories in a single sample
 
-*Purpose*: To test if Categories match with expected count(Goodness of fit).
+**Purpose**: To test if Categories match with expected count(Goodness of fit).
 
 We will use the XNomial library
 https://cran.r-project.org/web/packages/XNomial/index.html
@@ -105,8 +105,9 @@ library(RVAideMemoire) # for multinomial.multcomp
 multinomial.multcomp(xt, p.method="holm") # xt shows levels
 ```
 ### Chi-squared test 
+*notes taken from http://www.sthda.com/english/wiki/chi-square-goodness-of-fit-test-in-r
 
-The Chi-square Test of Goodness of Fit
+The **chi-square goodness of fit test** is used to compare the observed distribution to an expected distribution, in a situation where we have two or more categories in a discrete data. In other words, it compares multiple observed proportions to expected probabilities.
 
 ```{r Multinomial_chi_data}
 ## One-Sample Chi-Squared test
@@ -144,7 +145,7 @@ chisq.multcomp(xt, p.method="holm") # xt shows levels
 # for the Chi-Squared values, use qchisq(1-p, df=1), where p is the pairwise p-value.
 ```
 
-One-sample post hoc tests
+**One-sample post hoc tests**
 
 A different kind of post hoc test for one sample. For Y's response categories (x,y,z), test each proportion against chance.
 
@@ -152,6 +153,18 @@ A different kind of post hoc test for one sample. For Y's response categories (x
 Two Samples
 
 ### Fisher's exact test
+*notes from https://www.youtube.com/watch?v=WTDWk4eJIw0 by 
+Matthew E. Clapham
+
+Method for checking for independance, generally in small samples and small contingency table.
+
+**Types of data**: Categorical, 2x2 contingency table. Technically both row and column marginals should be fixed prior to data collection.
+
+**Purpose**: To test for assocation between the two counts. 
+
+**null hypothesis**: Category frequencies are independent of one another between the samples (i.e, there is no association amoung categories)
+
+
 ```{r fishers_df}
 # df is a long-format data table w/subject (S), categorical factor (X) and outcome (Y)
 df <- read.csv("data/Proportions/1F2LBs_multinomial.csv")
@@ -186,6 +199,26 @@ res
 # xt is an m × n crosstabs with categories X and Y
 library(RVAideMemoire) # for fisher.multcomp
 fisher.multcomp(xt, p.method="holm")
+```
+
+
+### G-test
+```{r g_test_data}
+# df is a long-format data table w/subject (S), categorical factor (X) and outcome (Y)
+library(RVAideMemoire) # for G.test
+df <- read.csv("data/Proportions/1F2LBs_multinomial.csv")
+head(df)
+```
+```{r g_test_factor}
+df$S = factor(df$S) # Subject id is nominal (unused)
+df$X = factor(df$X) # X is a factor of m ≥ 2 levels
+df$Y = factor(df$Y) # Y is an outcome of n ≥ 2 categories
+```
+```{r g_test_tabs}
+xt = xtabs( ~ X + Y, data=df) # make m × n crosstabs
+```
+```{r g_test}
+G.test(xt)
 ```
 References: 
 

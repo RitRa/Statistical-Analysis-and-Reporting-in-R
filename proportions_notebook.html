@@ -1571,16 +1571,16 @@ div.tocify {
 </div>
 
 
-<p>This lecture was taken from Statistical Analysis and Reporting in R, Jacob O. Wobbrock, Ph.D. available here: <a href="http://depts.washington.edu/acelab/proj/Rstats/index.html" class="uri">http://depts.washington.edu/acelab/proj/Rstats/index.html</a></p>
+<p>This code was taken from Statistical Analysis and Reporting in R, Jacob O. Wobbrock, Ph.D. available here: <a href="http://depts.washington.edu/acelab/proj/Rstats/index.html" class="uri">http://depts.washington.edu/acelab/proj/Rstats/index.html</a></p>
 <p>Proportions.R (Tests of Proportion &amp; Association)</p>
 <p>One Sample</p>
 <div id="binomial-test" class="section level3">
 <h3>Binomial test</h3>
 <p>When to use this test?</p>
 <p>*Notes taken from here:<a href="https://www.youtube.com/watch?v=WOoS7nVkfDk" class="uri">https://www.youtube.com/watch?v=WOoS7nVkfDk</a> by Matthew E.Clapham</p>
-<p><em>Type of Data</em>: Categorial, only have two categories in a single sample</p>
-<p><em>Purpose</em>: To test if Category has an expected count(Goodness of fit).</p>
-<p>The <em>goodness of fit</em> of a statistical model describes how well it fits a set of observations. Measures of goodness of fit typically summarize the discrepancy between observed values and the values expected under the model in question.</p>
+<p><strong>Type of Data</strong>: Categorial, only have two categories in a single sample</p>
+<p><strong>Purpose</strong>: To test if Category has an expected count(Goodness of fit).</p>
+<p>The <strong>goodness of fit</strong> of a statistical model describes how well it fits a set of observations. Measures of goodness of fit typically summarize the discrepancy between observed values and the values expected under the model in question.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># pull in the csv</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a>df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Proportions/0F0LBs_binomial.csv&quot;</span>)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw">head</span>(df)</span></code></pre></div>
@@ -1600,7 +1600,7 @@ div.tocify {
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>xt =<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Y, <span class="dt">data=</span>df) <span class="co"># make counts</span></span></code></pre></div>
 <p>19, 41</p>
 <p>binom.test</p>
-<p>Exact Binomial Test Performs an exact test of a simple null hypothesis about the probability of success in a Bernoulli experiment. <a href="https://www.rdocumentation.org/packages/stats/versions/3.1.1/topics/binom.test" class="uri">https://www.rdocumentation.org/packages/stats/versions/3.1.1/topics/binom.test</a></p>
+<p><strong>Exact Binomial Test</strong> Performs an exact test of a simple null hypothesis about the probability of success in a Bernoulli experiment. <a href="https://www.rdocumentation.org/packages/stats/versions/3.1.1/topics/binom.test" class="uri">https://www.rdocumentation.org/packages/stats/versions/3.1.1/topics/binom.test</a></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">binom.test</span>(xt, <span class="dt">p=</span><span class="fl">0.5</span>, <span class="dt">alternative=</span><span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Exact binomial test
@@ -1617,8 +1617,8 @@ div.tocify {
 </div>
 <div id="multinomial-test" class="section level3">
 <h3>Multinomial test</h3>
-<p><em>Type of Data</em>: Categorial, 3+ categories in a single sample</p>
-<p><em>Purpose</em>: To test if Categories match with expected count(Goodness of fit).</p>
+<p><strong>Type of Data</strong>: Categorial, 3+ categories in a single sample</p>
+<p><strong>Purpose</strong>: To test if Categories match with expected count(Goodness of fit).</p>
 <p>We will use the XNomial library <a href="https://cran.r-project.org/web/packages/XNomial/index.html" class="uri">https://cran.r-project.org/web/packages/XNomial/index.html</a></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># df is a long-format data table w/columns for subject (S) and N-category outcome (Y)</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;XNomial&quot;</span>)) <span class="kw">install.packages</span>(<span class="st">&quot;XNomial&quot;</span>);  </span></code></pre></div>
@@ -1673,7 +1673,7 @@ div.tocify {
 </div>
 <div id="chi-squared-test" class="section level3">
 <h3>Chi-squared test</h3>
-<p>The Chi-square Test of Goodness of Fit</p>
+<p><a href="http://www.sthda.com/english/wiki/chi-square-goodness-of-fit-test-in-r" class="uri">http://www.sthda.com/english/wiki/chi-square-goodness-of-fit-test-in-r</a> The chi-square goodness of fit test is used to compare the observed distribution to an expected distribution, in a situation where we have two or more categories in a discrete data. In other words, it compares multiple observed proportions to expected probabilities.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">## One-Sample Chi-Squared test</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a><span class="co"># df is a long-format data table w/columns for subject (S) and N-category outcome (Y)</span></span>
 <span id="cb22-3"><a href="#cb22-3"></a>df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Proportions/0F0LBs_multinomial.csv&quot;</span>)</span>
@@ -1722,12 +1722,17 @@ div.tocify {
 ## 
 ## P value adjustment method: holm</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># for the Chi-Squared values, use qchisq(1-p, df=1), where p is the pairwise p-value.</span></span></code></pre></div>
-<p>One-sample post hoc tests</p>
+<p><strong>One-sample post hoc tests</strong></p>
 <p>A different kind of post hoc test for one sample. For Y’s response categories (x,y,z), test each proportion against chance.</p>
 <p>Two Samples</p>
 </div>
 <div id="fishers-exact-test" class="section level3">
 <h3>Fisher’s exact test</h3>
+<p>*notes from <a href="https://www.youtube.com/watch?v=WTDWk4eJIw0" class="uri">https://www.youtube.com/watch?v=WTDWk4eJIw0</a> by Matthew E. Clapham</p>
+<p>Method for checking for independance, generally in small samples and small contingency table.</p>
+<p><strong>Types of data</strong>: Categorical, 2x2 contingency table. Technically both row and column marginals should be fixed prior to data collection.</p>
+<p><strong>Purpose</strong>: To test for assocation between the two counts.</p>
+<p><strong>null hypothesis</strong>: Category frequencies are independent of one another between the samples (i.e, there is no association amoung categories)</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># df is a long-format data table w/subject (S), categorical factor (X) and outcome (Y)</span></span>
 <span id="cb35-2"><a href="#cb35-2"></a>df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Proportions/1F2LBs_multinomial.csv&quot;</span>)</span>
 <span id="cb35-3"><a href="#cb35-3"></a><span class="kw">head</span>(df)</span></code></pre></div>
@@ -1747,9 +1752,59 @@ div.tocify {
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">unique</span>(df<span class="op">$</span>Y)</span></code></pre></div>
 <pre><code>## [1] y x z
 ## Levels: x y z</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>xt =<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>X <span class="op">+</span><span class="st"> </span>Y, <span class="dt">data=</span>df) <span class="co"># make m × n crosstabs</span></span></code></pre></div>
-<p>3, 14, 26, 9, 1, 7</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>res &lt;-<span class="st"> </span><span class="kw">fisher.test</span>(xt)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>xt =<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>X <span class="op">+</span><span class="st"> </span>Y, <span class="dt">data=</span>df) <span class="co"># make m × n crosstabs</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>xt</span></code></pre></div>
+<pre><code>##    Y
+## X    x  y  z
+##   a  3 26  1
+##   b 14  9  7</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>res &lt;-<span class="st"> </span><span class="kw">fisher.test</span>(xt)</span>
+<span id="cb44-2"><a href="#cb44-2"></a>res</span></code></pre></div>
+<pre><code>## 
+##  Fisher&#39;s Exact Test for Count Data
+## 
+## data:  xt
+## p-value = 2.432e-05
+## alternative hypothesis: two.sided</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="co">## Fisher&#39;s post hoc test</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a><span class="co"># xt is an m × n crosstabs with categories X and Y</span></span>
+<span id="cb46-3"><a href="#cb46-3"></a><span class="kw">library</span>(RVAideMemoire) <span class="co"># for fisher.multcomp</span></span>
+<span id="cb46-4"><a href="#cb46-4"></a><span class="kw">fisher.multcomp</span>(xt, <span class="dt">p.method=</span><span class="st">&quot;holm&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##         Pairwise comparisons using Fisher&#39;s exact test for count data
+## 
+## data:  xt
+## 
+##           x:y x:z      y:z
+## a:b 0.0006569   1 0.004438
+## 
+## P value adjustment method: holm</code></pre>
+</div>
+<div id="g-test" class="section level3">
+<h3>G-test</h3>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="co"># df is a long-format data table w/subject (S), categorical factor (X) and outcome (Y)</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a><span class="kw">library</span>(RVAideMemoire) <span class="co"># for G.test</span></span>
+<span id="cb48-3"><a href="#cb48-3"></a>df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Proportions/1F2LBs_multinomial.csv&quot;</span>)</span>
+<span id="cb48-4"><a href="#cb48-4"></a><span class="kw">head</span>(df)</span></code></pre></div>
+<pre><code>##   S X Y
+## 1 1 a y
+## 2 2 b x
+## 3 3 a x
+## 4 4 b y
+## 5 5 a y
+## 6 6 b x</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>df<span class="op">$</span>S =<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>S) <span class="co"># Subject id is nominal (unused)</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a>df<span class="op">$</span>X =<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>X) <span class="co"># X is a factor of m ≥ 2 levels</span></span>
+<span id="cb50-3"><a href="#cb50-3"></a>df<span class="op">$</span>Y =<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>Y) <span class="co"># Y is an outcome of n ≥ 2 categories</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>xt =<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>X <span class="op">+</span><span class="st"> </span>Y, <span class="dt">data=</span>df) <span class="co"># make m × n crosstabs</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="kw">G.test</span>(xt)</span></code></pre></div>
+<pre><code>## 
+##  G-test
+## 
+## data:  xt
+## G = 21.402, df = 2, p-value = 2.252e-05</code></pre>
+<p>References:</p>
+<p><a href="http://www.sthda.com/english/wiki/comparing-proportions-in-r" class="uri">http://www.sthda.com/english/wiki/comparing-proportions-in-r</a> <a href="http://www.sthda.com/english/wiki/chi-square-goodness-of-fit-test-in-r#what-is-chi-square-goodness-of-fit-test" class="uri">http://www.sthda.com/english/wiki/chi-square-goodness-of-fit-test-in-r#what-is-chi-square-goodness-of-fit-test</a></p>
 </div>
 
 
