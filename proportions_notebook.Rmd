@@ -1,0 +1,95 @@
+---
+title: "Proportions Notebook"
+output: 
+  md_document:
+  html_document:
+    highlight: tango
+    theme: cerulean
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+---
+
+This lecture was taken from Statistical Analysis and Reporting in R, Jacob O. Wobbrock, Ph.D.
+available here: http://depts.washington.edu/acelab/proj/Rstats/index.html
+
+ Proportions.R
+(Tests of Proportion & Association)
+
+One Sample
+
+
+#### Binomial test
+
+When to use this test? 
+
+*Notes taken from here:https://www.youtube.com/watch?v=WOoS7nVkfDk by Matthew E.Clapham
+
+*Type of Data*: Categorial, only have two categories in a single sample
+
+*Purpose*: To test if Category has an expected count(Goodness of fit).
+
+The *goodness of fit* of a statistical model describes how well it fits a set of observations. Measures of goodness of fit typically summarize the discrepancy between observed values and the values expected under the model in question.
+
+
+```{r setup}
+
+knitr::opts_chunk$set(echo = TRUE)
+# pull in the csv
+df <- read.csv("data/Proportions/0F0LBs_binomial.csv")
+df
+```
+##### Create factors
+Subject id is nominal and Y is categorical
+
+```{r factors}
+
+df$S = factor(df$S) # Subject id is nominal (unused)
+df$Y = factor(df$Y) # Y is an outcome of exactly two categories
+
+```
+Column Y is made up of two values: `r unique(df$Y)`
+```{r xtabs}
+xt = xtabs( ~ Y, data=df) # make counts
+
+```
+`r xt`
+
+binom.test 
+
+Exact Binomial Test
+Performs an exact test of a simple null hypothesis about the probability of success in a Bernoulli experiment.
+https://www.rdocumentation.org/packages/stats/versions/3.1.1/topics/binom.test
+
+```{r binomial_test}
+binom.test(xt, p=0.5, alternative="two.sided")
+```
+
+
+#### Multinomial test
+*Type of Data*: Categorial, 3+ categories in a single sample
+
+*Purpose*: To test if Categories match with expected count(Goodness of fit).
+
+We will use the XNomial library
+https://cran.r-project.org/web/packages/XNomial/index.html
+
+```{r Multinomial_library}
+# df is a long-format data table w/columns for subject (S) and N-category outcome (Y)
+if (!require("XNomial")) install.packages("XNomial");  
+library(XNomial) # for xmulti
+```
+
+```{r Multinomial_dataset}
+df_multi <- read.csv("data/Proportions/0F0LBs_multinomial.csv")
+```
+```{r Multinomial_factor}
+df_multi$S = factor(df$S) # Subject id is nominal (unused)
+df$Y = factor(df$Y) # Y is an outcome of ≥2 categories
+```
+```{r Multinomial_tabs}
+xt = xtabs( ~ Y, data=df) # make counts
+```
+```{r Multinomial_test}
+xmulti(xt, rep(1/length(xt), length(xt)), statName="Prob")
+```
