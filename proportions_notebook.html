@@ -1574,78 +1574,23 @@ div.tocify {
 <p>This lecture was taken from Statistical Analysis and Reporting in R, Jacob O. Wobbrock, Ph.D. available here: <a href="http://depts.washington.edu/acelab/proj/Rstats/index.html" class="uri">http://depts.washington.edu/acelab/proj/Rstats/index.html</a></p>
 <p>Proportions.R (Tests of Proportion &amp; Association)</p>
 <p>One Sample</p>
-<div id="binomial-test" class="section level4">
-<h4>Binomial test</h4>
+<div id="binomial-test" class="section level3">
+<h3>Binomial test</h3>
 <p>When to use this test?</p>
 <p>*Notes taken from here:<a href="https://www.youtube.com/watch?v=WOoS7nVkfDk" class="uri">https://www.youtube.com/watch?v=WOoS7nVkfDk</a> by Matthew E.Clapham</p>
 <p><em>Type of Data</em>: Categorial, only have two categories in a single sample</p>
 <p><em>Purpose</em>: To test if Category has an expected count(Goodness of fit).</p>
 <p>The <em>goodness of fit</em> of a statistical model describes how well it fits a set of observations. Measures of goodness of fit typically summarize the discrepancy between observed values and the values expected under the model in question.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># pull in the csv</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Proportions/0F0LBs_binomial.csv&quot;</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a>df</span></code></pre></div>
-<pre><code>##     S Y
-## 1   1 y
-## 2   2 y
-## 3   3 x
-## 4   4 y
-## 5   5 y
-## 6   6 x
-## 7   7 y
-## 8   8 x
-## 9   9 y
-## 10 10 y
-## 11 11 x
-## 12 12 y
-## 13 13 y
-## 14 14 y
-## 15 15 y
-## 16 16 x
-## 17 17 x
-## 18 18 y
-## 19 19 y
-## 20 20 x
-## 21 21 y
-## 22 22 x
-## 23 23 y
-## 24 24 y
-## 25 25 y
-## 26 26 y
-## 27 27 y
-## 28 28 y
-## 29 29 y
-## 30 30 y
-## 31 31 y
-## 32 32 y
-## 33 33 x
-## 34 34 x
-## 35 35 y
-## 36 36 y
-## 37 37 y
-## 38 38 y
-## 39 39 y
-## 40 40 x
-## 41 41 x
-## 42 42 y
-## 43 43 y
-## 44 44 x
-## 45 45 y
-## 46 46 x
-## 47 47 x
-## 48 48 x
-## 49 49 y
-## 50 50 y
-## 51 51 x
-## 52 52 y
-## 53 53 y
-## 54 54 y
-## 55 55 x
-## 56 56 y
-## 57 57 y
-## 58 58 y
-## 59 59 x
-## 60 60 y</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># pull in the csv</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Proportions/0F0LBs_binomial.csv&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">head</span>(df)</span></code></pre></div>
+<pre><code>##   S Y
+## 1 1 y
+## 2 2 y
+## 3 3 x
+## 4 4 y
+## 5 5 y
+## 6 6 x</code></pre>
 <div id="create-factors" class="section level5">
 <h5>Create factors</h5>
 <p>Subject id is nominal and Y is categorical</p>
@@ -1670,22 +1615,141 @@ div.tocify {
 ##              0.3166667</code></pre>
 </div>
 </div>
-<div id="multinomial-test" class="section level4">
-<h4>Multinomial test</h4>
+<div id="multinomial-test" class="section level3">
+<h3>Multinomial test</h3>
 <p><em>Type of Data</em>: Categorial, 3+ categories in a single sample</p>
 <p><em>Purpose</em>: To test if Categories match with expected count(Goodness of fit).</p>
 <p>We will use the XNomial library <a href="https://cran.r-project.org/web/packages/XNomial/index.html" class="uri">https://cran.r-project.org/web/packages/XNomial/index.html</a></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># df is a long-format data table w/columns for subject (S) and N-category outcome (Y)</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;XNomial&quot;</span>)) <span class="kw">install.packages</span>(<span class="st">&quot;XNomial&quot;</span>);  </span></code></pre></div>
 <pre><code>## Loading required package: XNomial</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">library</span>(XNomial) <span class="co"># for xmulti</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>df_multi &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Proportions/0F0LBs_multinomial.csv&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>df_multi<span class="op">$</span>S =<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>S) <span class="co"># Subject id is nominal (unused)</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>df<span class="op">$</span>Y =<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>Y) <span class="co"># Y is an outcome of ≥2 categories</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>xt =<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Y, <span class="dt">data=</span>df) <span class="co"># make counts</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">library</span>(XNomial) <span class="co"># for xmulti</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>df_multi &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Proportions/0F0LBs_multinomial.csv&quot;</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">head</span>(df_multi) </span></code></pre></div>
+<pre><code>##   S Y
+## 1 1 z
+## 2 2 z
+## 3 3 z
+## 4 4 x
+## 5 5 z
+## 6 6 z</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>df_multi<span class="op">$</span>S =<span class="st"> </span><span class="kw">factor</span>(df_multi<span class="op">$</span>S) <span class="co"># Subject id is nominal (unused)</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>df_multi<span class="op">$</span>Y =<span class="st"> </span><span class="kw">factor</span>(df_multi<span class="op">$</span>Y) <span class="co"># Y is an outcome of ≥2 categories</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>xt =<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Y, <span class="dt">data=</span>df_multi) <span class="co"># make counts</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>xt <span class="co"># 3 categorical variables</span></span></code></pre></div>
+<pre><code>## Y
+##  x  y  z 
+## 17  8 35</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">xmulti</span>(xt, <span class="kw">rep</span>(<span class="dv">1</span><span class="op">/</span><span class="kw">length</span>(xt), <span class="kw">length</span>(xt)), <span class="dt">statName=</span><span class="st">&quot;Prob&quot;</span>)</span></code></pre></div>
 <pre><code>## 
-## P value (Prob) = 0.006218</code></pre>
+## P value (Prob) = 8.756e-05</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># the following gives the equivalent result</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">require</span>(<span class="st">&quot;RVAideMemoire&quot;</span>)) <span class="kw">install.packages</span>(<span class="st">&quot;RVAideMemoire&quot;</span>);  </span></code></pre></div>
+<pre><code>## Loading required package: RVAideMemoire</code></pre>
+<pre><code>## *** Package RVAideMemoire v 0.9-75 ***</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">library</span>(RVAideMemoire) <span class="co"># for multinomial.test</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">multinomial.test</span>(df_multi<span class="op">$</span>Y)</span></code></pre></div>
+<pre><code>## 
+##  Exact multinomial test
+## 
+## data:  $(df_multi,Y)
+## p-value = 8.756e-05</code></pre>
+<p>Multinomial post hoc test</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># xt is a table of counts for each category of Y</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">library</span>(RVAideMemoire) <span class="co"># for multinomial.multcomp</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="kw">multinomial.multcomp</span>(xt, <span class="dt">p.method=</span><span class="st">&quot;holm&quot;</span>) <span class="co"># xt shows levels</span></span></code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using exact binomial tests 
+## 
+## data:  xt 
+## 
+##    8       17     
+## 17 0.10775 -      
+## 35 0.00013 0.03507
+## 
+## P value adjustment method: holm</code></pre>
+</div>
+<div id="chi-squared-test" class="section level3">
+<h3>Chi-squared test</h3>
+<p>The Chi-square Test of Goodness of Fit</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co">## One-Sample Chi-Squared test</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="co"># df is a long-format data table w/columns for subject (S) and N-category outcome (Y)</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Proportions/0F0LBs_multinomial.csv&quot;</span>)</span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="kw">head</span>(df)</span></code></pre></div>
+<pre><code>##   S Y
+## 1 1 z
+## 2 2 z
+## 3 3 z
+## 4 4 x
+## 5 5 z
+## 6 6 z</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>df<span class="op">$</span>S =<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>S) <span class="co"># Subject id is nominal (unused)</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>df<span class="op">$</span>Y =<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>Y) <span class="co"># Y is an outcome from two or more categories</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>xt =<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>Y, <span class="dt">data=</span>df) <span class="co"># make counts</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>xt</span></code></pre></div>
+<pre><code>## Y
+##  x  y  z 
+## 17  8 35</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>result &lt;-<span class="kw">chisq.test</span>(xt)</span>
+<span id="cb26-2"><a href="#cb26-2"></a>result </span></code></pre></div>
+<pre><code>## 
+##  Chi-squared test for given probabilities
+## 
+## data:  xt
+## X-squared = 18.9, df = 2, p-value = 7.869e-05</code></pre>
+<p>The p-value of the test is 7.869e-05, which is less than the significiance level alpha =0.05. We can conclude that the outcomes are not evenly distributed p-value of 7.869e-05.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># access of the expected value</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>result<span class="op">$</span>expected</span></code></pre></div>
+<pre><code>##  x  y  z 
+## 20 20 20</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># access of the expected value</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>result<span class="op">$</span>p.value</span></code></pre></div>
+<pre><code>## [1] 7.868957e-05</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co">## Chi-Squared post hoc test</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="co"># xt is a table of counts for each category of Y</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="kw">library</span>(RVAideMemoire) <span class="co"># for chisq.multcomp</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="kw">chisq.multcomp</span>(xt, <span class="dt">p.method=</span><span class="st">&quot;holm&quot;</span>) <span class="co"># xt shows levels</span></span></code></pre></div>
+<pre><code>## 
+##  Pairwise comparisons using chi-squared tests 
+## 
+## data:  xt 
+## 
+##    8       17     
+## 17 0.07186 -      
+## 35 0.00011 0.02511
+## 
+## P value adjustment method: holm</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># for the Chi-Squared values, use qchisq(1-p, df=1), where p is the pairwise p-value.</span></span></code></pre></div>
+<p>One-sample post hoc tests</p>
+<p>A different kind of post hoc test for one sample. For Y’s response categories (x,y,z), test each proportion against chance.</p>
+<p>Two Samples</p>
+</div>
+<div id="fishers-exact-test" class="section level3">
+<h3>Fisher’s exact test</h3>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># df is a long-format data table w/subject (S), categorical factor (X) and outcome (Y)</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/Proportions/1F2LBs_multinomial.csv&quot;</span>)</span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="kw">head</span>(df)</span></code></pre></div>
+<pre><code>##   S X Y
+## 1 1 a y
+## 2 2 b x
+## 3 3 a x
+## 4 4 b y
+## 5 5 a y
+## 6 6 b x</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>df<span class="op">$</span>S =<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>S) <span class="co"># Subject id is nominal (unused)</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>df<span class="op">$</span>X =<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>X) <span class="co"># X is a factor of m ≥ 2 levels</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a>df<span class="op">$</span>Y =<span class="st"> </span><span class="kw">factor</span>(df<span class="op">$</span>Y) <span class="co"># Y is an outcome of n ≥ 2 categories</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">unique</span>(df<span class="op">$</span>X)</span></code></pre></div>
+<pre><code>## [1] a b
+## Levels: a b</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">unique</span>(df<span class="op">$</span>Y)</span></code></pre></div>
+<pre><code>## [1] y x z
+## Levels: x y z</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>xt =<span class="st"> </span><span class="kw">xtabs</span>( <span class="op">~</span><span class="st"> </span>X <span class="op">+</span><span class="st"> </span>Y, <span class="dt">data=</span>df) <span class="co"># make m × n crosstabs</span></span></code></pre></div>
+<p>3, 14, 26, 9, 1, 7</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>res &lt;-<span class="st"> </span><span class="kw">fisher.test</span>(xt)</span></code></pre></div>
 </div>
 
 

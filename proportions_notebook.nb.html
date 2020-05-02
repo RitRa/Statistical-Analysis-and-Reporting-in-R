@@ -1752,8 +1752,8 @@ summary {
 <p>This lecture was taken from Statistical Analysis and Reporting in R, Jacob O. Wobbrock, Ph.D. available here: <a href="http://depts.washington.edu/acelab/proj/Rstats/index.html" class="uri">http://depts.washington.edu/acelab/proj/Rstats/index.html</a></p>
 <p>Proportions.R (Tests of Proportion &amp; Association)</p>
 <p>One Sample</p>
-<div id="binomial-test" class="section level4">
-<h4>Binomial test</h4>
+<div id="binomial-test" class="section level3">
+<h3>Binomial test</h3>
 <p>When to use this test?</p>
 <p>*Notes taken from here:<a href="https://www.youtube.com/watch?v=WOoS7nVkfDk" class="uri">https://www.youtube.com/watch?v=WOoS7nVkfDk</a> by Matthew E.Clapham</p>
 <p><em>Type of Data</em>: Categorial, only have two categories in a single sample</p>
@@ -1761,10 +1761,15 @@ summary {
 <p>The <em>goodness of fit</em> of a statistical model describes how well it fits a set of observations. Measures of goodness of fit typically summarize the discrepancy between observed values and the values expected under the model in question.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MiwibnJvdyI6NjB9LCJyZGYiOiJINHNJQUFBQUFBQUFBNDNTMTA3RE1CUUdZRGVqcFlHeTk5NjdZWlJOTHhFUHdKREtwVWxkaUJTU0tra1pkeng1NFhkcVF6QkZwZEtuSHR2SEovR0pyeTRxSmF0aUVVSjBvbWMxb3BzSWlYbDdjMWs4SWNUUU1NZ1FnK1Q1L3l1U2hoRHd5UUtVazhYV1dBZUQ3NFFzNUtBTCtFWmV2UnQ2eEw1ZTZJTitHSUJCNEhXSFlRUkdZUXpHWVFJbVlRcW1ZUVptWVE3bVlRRVdZUW1XWVFWV1lRM1dZUU0yWVF1Mm9RZzI3TUF1N01FK2xPQUFEdUVJamdFTklLZHdCdWV0OCtyeTNKcVFhUk8zbTlPVXVVNzdPbEZyL0xmK1gyc2R4ajh1UXRaano4eUx4QmZVdnErSENONlVmTlB4YUNUVHY0clVxQk1ISWFLbW11N1RKL2FyK3JVTTdwVDBmQmk4MkhJTC96emFPMGwrNVZhaS9xRTgyYXJTbU5xMUVGdmFQRDBYMUdNMzhGRk00M2VTMzJNcjFiZDBvVXlZV2lUS29obXh1RkZYRWdvaUxxZGkwVjFEdm1aT0ZEQ1k4eGpJWmpIL3dmV1pmRVhYZDd4R1ZRNU5qOTR6VHd4NjBZMmtHWFk5ZFAxWUhobXprUjBITVpWNWxoTjRjaVpwQW1sK0F1UlpTM1FMQkFBQSJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBwdWxsIGluIHRoZSBjc3ZcbmRmIDwtIHJlYWQuY3N2KFwiZGF0YS9Qcm9wb3J0aW9ucy8wRjBMQnNfYmlub21pYWwuY3N2XCIpXG5oZWFkKGRmKVxuYGBgIn0= -->
+<pre class="r"><code># pull in the csv
+df &lt;- read.csv(&quot;data/Proportions/0F0LBs_binomial.csv&quot;)
+head(df)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MiwibnJvdyI6Nn0sInJkZiI6Ikg0c0lBQUFBQUFBQUEyMVEyMjdESUF4MUlCQTFVcWRKKzQ3bFpTLzlnR2tmc0l2VVBUSkt0MGdVb29UdThyWXY3MllJcmxvMkpJdGorL2dZenYzdCtxWmR0d0RBZ1VzR1hDQUU4ZlI0ZDcwQ3FCa21GZFN3aVBjbmtxNFF4T0lTUTZibW5IT01PazdPZFU1OWxxTTZ4MmZDMHBwM1l5ZEVsNGx4WEpmQlY4RVgycXFKNkVlUnJkTEJqNGdPSmQycG5mbWova0RndWFBdlJ2L1IwVWo4QnZ1R2RPUk01RC9GNW5hamd1cTJJNDc4czczeFEraTlRekVXdld2aVFQYWpLb1NxOGFRSlJWTk1KdXlIWW5xWmIzbUMyZnlBbXA3WlpJSGE2RGRQWmhuMzJqdERUK3lkdHZzTnBjS3FGMk56Y29GdUpETzZZZXhkb0M5amRlcUNENHA0cmZhV0tza0VPUHdDR3RWb2ZGc0NBQUE9In0= -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["S"],"name":[1],"type":["int"],"align":["right"]},{"label":["Y"],"name":[2],"type":["fctr"],"align":["left"]}],"data":[{"1":"1","2":"y"},{"1":"2","2":"y"},{"1":"3","2":"x"},{"1":"4","2":"y"},{"1":"5","2":"y"},{"1":"6","2":"x"},{"1":"7","2":"y"},{"1":"8","2":"x"},{"1":"9","2":"y"},{"1":"10","2":"y"},{"1":"11","2":"x"},{"1":"12","2":"y"},{"1":"13","2":"y"},{"1":"14","2":"y"},{"1":"15","2":"y"},{"1":"16","2":"x"},{"1":"17","2":"x"},{"1":"18","2":"y"},{"1":"19","2":"y"},{"1":"20","2":"x"},{"1":"21","2":"y"},{"1":"22","2":"x"},{"1":"23","2":"y"},{"1":"24","2":"y"},{"1":"25","2":"y"},{"1":"26","2":"y"},{"1":"27","2":"y"},{"1":"28","2":"y"},{"1":"29","2":"y"},{"1":"30","2":"y"},{"1":"31","2":"y"},{"1":"32","2":"y"},{"1":"33","2":"x"},{"1":"34","2":"x"},{"1":"35","2":"y"},{"1":"36","2":"y"},{"1":"37","2":"y"},{"1":"38","2":"y"},{"1":"39","2":"y"},{"1":"40","2":"x"},{"1":"41","2":"x"},{"1":"42","2":"y"},{"1":"43","2":"y"},{"1":"44","2":"x"},{"1":"45","2":"y"},{"1":"46","2":"x"},{"1":"47","2":"x"},{"1":"48","2":"x"},{"1":"49","2":"y"},{"1":"50","2":"y"},{"1":"51","2":"x"},{"1":"52","2":"y"},{"1":"53","2":"y"},{"1":"54","2":"y"},{"1":"55","2":"x"},{"1":"56","2":"y"},{"1":"57","2":"y"},{"1":"58","2":"y"},{"1":"59","2":"x"},{"1":"60","2":"y"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[60]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["S"],"name":[1],"type":["int"],"align":["right"]},{"label":["Y"],"name":[2],"type":["fctr"],"align":["left"]}],"data":[{"1":"1","2":"y","_rn_":"1"},{"1":"2","2":"y","_rn_":"2"},{"1":"3","2":"x","_rn_":"3"},{"1":"4","2":"y","_rn_":"4"},{"1":"5","2":"y","_rn_":"5"},{"1":"6","2":"x","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
@@ -1800,66 +1805,199 @@ df$Y = factor(df$Y) # Y is an outcome of exactly two categories
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYmlub20udGVzdCh4dCwgcD0wLjUsIGFsdGVybmF0aXZlPVwidHdvLnNpZGVkXCIpXG5gYGAifQ== -->
 <pre class="r"><code>binom.test(xt, p=0.5, alternative=&quot;two.sided&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5cdEV4YWN0IGJpbm9taWFsIHRlc3RcblxuZGF0YTogIHh0XG5udW1iZXIgb2Ygc3VjY2Vzc2VzID0gMTksIG51bWJlciBvZiB0cmlhbHMgPSA2MCwgcC12YWx1ZSA9XG4wLjAwNjIxOFxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBwcm9iYWJpbGl0eSBvZiBzdWNjZXNzIGlzIG5vdCBlcXVhbCB0byAwLjVcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjIwMjU3NTUgMC40NDk1NTk3XG5zYW1wbGUgZXN0aW1hdGVzOlxucHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBcbiAgICAgICAgICAgICAwLjMxNjY2NjcgXG4ifQ== -->
-<pre><code>
-    Exact binomial test
-
-data:  xt
-number of successes = 19, number of trials = 60, p-value =
-0.006218
-alternative hypothesis: true probability of success is not equal to 0.5
-95 percent confidence interval:
- 0.2025755 0.4495597
-sample estimates:
-probability of success 
-             0.3166667 </code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
 </div>
-<div id="multinomial-test" class="section level4">
-<h4>Multinomial test</h4>
+<div id="multinomial-test" class="section level3">
+<h3>Multinomial test</h3>
 <p><em>Type of Data</em>: Categorial, 3+ categories in a single sample</p>
 <p><em>Purpose</em>: To test if Categories match with expected count(Goodness of fit).</p>
 <p>We will use the XNomial library <a href="https://cran.r-project.org/web/packages/XNomial/index.html" class="uri">https://cran.r-project.org/web/packages/XNomial/index.html</a></p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBkZiBpcyBhIGxvbmctZm9ybWF0IGRhdGEgdGFibGUgdy9jb2x1bW5zIGZvciBzdWJqZWN0IChTKSBhbmQgTi1jYXRlZ29yeSBvdXRjb21lIChZKVxuaWYgKCFyZXF1aXJlKFwiWE5vbWlhbFwiKSkgaW5zdGFsbC5wYWNrYWdlcyhcIlhOb21pYWxcIik7ICBcbmxpYnJhcnkoWE5vbWlhbCkgIyBmb3IgeG11bHRpXG5gYGAifQ== -->
-<pre class="r"><code># df is a long-format data table w/columns for subject (S) and N-category outcome (Y)
-if (!require(&quot;XNomial&quot;)) install.packages(&quot;XNomial&quot;);  
-library(XNomial) # for xmulti</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBkZiBpcyBhIGxvbmctZm9ybWF0IGRhdGEgdGFibGUgdy9jb2x1bW5zIGZvciBzdWJqZWN0IChTKSBhbmQgTi1jYXRlZ29yeSBvdXRjb21lIChZKVxuaWYgKCFyZXF1aXJlKFwiWE5vbWlhbFwiKSkgaW5zdGFsbC5wYWNrYWdlcyhcIlhOb21pYWxcIik7ICBcbmxpYnJhcnkoWE5vbWlhbCkgIyBmb3IgeG11bHRpXG5kZl9tdWx0aSA8LSByZWFkLmNzdihcImRhdGEvUHJvcG9ydGlvbnMvMEYwTEJzX211bHRpbm9taWFsLmNzdlwiKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBkZiBpcyBhIGxvbmctZm9ybWF0IGRhdGEgdGFibGUgdy9jb2x1bW5zIGZvciBzdWJqZWN0IChTKSBhbmQgTi1jYXRlZ29yeSBvdXRjb21lIChZKVxuaWYgKCFyZXF1aXJlKFwiWE5vbWlhbFwiKSkgaW5zdGFsbC5wYWNrYWdlcyhcIlhOb21pYWxcIik7ICBcbmxpYnJhcnkoWE5vbWlhbCkgIyBmb3IgeG11bHRpXG5cbmRmX211bHRpIDwtIHJlYWQuY3N2KFwiZGF0YS9Qcm9wb3J0aW9ucy8wRjBMQnNfbXVsdGlub21pYWwuY3N2XCIpXG5oZWFkKGRmX211bHRpKSBcbmBgYCJ9 -->
 <pre class="r"><code># df is a long-format data table w/columns for subject (S) and N-category outcome (Y)
 if (!require(&quot;XNomial&quot;)) install.packages(&quot;XNomial&quot;);  
 library(XNomial) # for xmulti
-df_multi &lt;- read.csv(&quot;data/Proportions/0F0LBs_multinomial.csv&quot;)</code></pre>
+
+df_multi &lt;- read.csv(&quot;data/Proportions/0F0LBs_multinomial.csv&quot;)
+head(df_multi) </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGZfbXVsdGkkUyA9IGZhY3RvcihkZiRTKSAjIFN1YmplY3QgaWQgaXMgbm9taW5hbCAodW51c2VkKVxuZGYkWSA9IGZhY3RvcihkZiRZKSAjIFkgaXMgYW4gb3V0Y29tZSBvZiDiiaUyIGNhdGVnb3JpZXNcbmBgYCJ9 -->
-<pre class="r"><code>df_multi$S = factor(df$S) # Subject id is nominal (unused)
-df$Y = factor(df$Y) # Y is an outcome of ≥2 categories</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGZfbXVsdGkkUyA9IGZhY3RvcihkZl9tdWx0aSRTKSAjIFN1YmplY3QgaWQgaXMgbm9taW5hbCAodW51c2VkKVxuZGZfbXVsdGkkWSA9IGZhY3RvcihkZl9tdWx0aSRZKSAjIFkgaXMgYW4gb3V0Y29tZSBvZiDiiaUyIGNhdGVnb3JpZXNcbnh0ID0geHRhYnMoIH4gWSwgZGF0YT1kZl9tdWx0aSkgIyBtYWtlIGNvdW50c1xueHQgIyAzIGNhdGVnb3JpY2FsIHZhcmlhYmxlc1xuYGBgIn0= -->
+<pre class="r"><code>df_multi$S = factor(df_multi$S) # Subject id is nominal (unused)
+df_multi$Y = factor(df_multi$Y) # Y is an outcome of ≥2 categories
+xt = xtabs( ~ Y, data=df_multi) # make counts
+xt # 3 categorical variables</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueHQgPSB4dGFicyggfiBZLCBkYXRhPWRmKSAjIG1ha2UgY291bnRzXG5gYGAifQ== -->
-<pre class="r"><code>xt = xtabs( ~ Y, data=df) # make counts</code></pre>
-<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWVxuIHggIHkgIHogXG4xNyAgOCAzNSBcbiJ9 -->
+<pre><code>Y
+ x  y  z 
+17  8 35 </code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueG11bHRpKHh0LCByZXAoMS9sZW5ndGgoeHQpLCBsZW5ndGgoeHQpKSwgc3RhdE5hbWU9XCJQcm9iXCIpXG5gYGAifQ== -->
 <pre class="r"><code>xmulti(xt, rep(1/length(xt), length(xt)), statName=&quot;Prob&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB0aGUgZm9sbG93aW5nIGdpdmVzIHRoZSBlcXVpdmFsZW50IHJlc3VsdFxuaWYgKCFyZXF1aXJlKFwiUlZBaWRlTWVtb2lyZVwiKSkgaW5zdGFsbC5wYWNrYWdlcyhcIlJWQWlkZU1lbW9pcmVcIik7ICBcbmxpYnJhcnkoUlZBaWRlTWVtb2lyZSkgIyBmb3IgbXVsdGlub21pYWwudGVzdFxuXG5tdWx0aW5vbWlhbC50ZXN0KGRmX211bHRpJFkpXG5gYGAifQ== -->
+<pre class="r"><code># the following gives the equivalent result
+if (!require(&quot;RVAideMemoire&quot;)) install.packages(&quot;RVAideMemoire&quot;);  
+library(RVAideMemoire) # for multinomial.test
+
+multinomial.test(df_multi$Y)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Multinomial post hoc test</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB4dCBpcyBhIHRhYmxlIG9mIGNvdW50cyBmb3IgZWFjaCBjYXRlZ29yeSBvZiBZXG5saWJyYXJ5KFJWQWlkZU1lbW9pcmUpICMgZm9yIG11bHRpbm9taWFsLm11bHRjb21wXG5tdWx0aW5vbWlhbC5tdWx0Y29tcCh4dCwgcC5tZXRob2Q9XCJob2xtXCIpICMgeHQgc2hvd3MgbGV2ZWxzXG5gYGAifQ== -->
+<pre class="r"><code># xt is a table of counts for each category of Y
+library(RVAideMemoire) # for multinomial.multcomp
+multinomial.multcomp(xt, p.method=&quot;holm&quot;) # xt shows levels</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="chi-squared-test" class="section level3">
+<h3>Chi-squared test</h3>
+<p>The Chi-square Test of Goodness of Fit</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgT25lLVNhbXBsZSBDaGktU3F1YXJlZCB0ZXN0XG4jIGRmIGlzIGEgbG9uZy1mb3JtYXQgZGF0YSB0YWJsZSB3L2NvbHVtbnMgZm9yIHN1YmplY3QgKFMpIGFuZCBOLWNhdGVnb3J5IG91dGNvbWUgKFkpXG5kZiA8LSByZWFkLmNzdihcImRhdGEvUHJvcG9ydGlvbnMvMEYwTEJzX211bHRpbm9taWFsLmNzdlwiKVxuaGVhZChkZilcbmBgYCJ9 -->
+<pre class="r"><code>## One-Sample Chi-Squared test
+# df is a long-format data table w/columns for subject (S) and N-category outcome (Y)
+df &lt;- read.csv(&quot;data/Proportions/0F0LBs_multinomial.csv&quot;)
+head(df)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGYkUyA9IGZhY3RvcihkZiRTKSAjIFN1YmplY3QgaWQgaXMgbm9taW5hbCAodW51c2VkKVxuZGYkWSA9IGZhY3RvcihkZiRZKSAjIFkgaXMgYW4gb3V0Y29tZSBmcm9tIHR3byBvciBtb3JlIGNhdGVnb3JpZXNcbnh0ID0geHRhYnMoIH4gWSwgZGF0YT1kZikgIyBtYWtlIGNvdW50c1xueHRcbmBgYCJ9 -->
+<pre class="r"><code>df$S = factor(df$S) # Subject id is nominal (unused)
+df$Y = factor(df$Y) # Y is an outcome from two or more categories
+xt = xtabs( ~ Y, data=df) # make counts
+xt</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWVxuIHggIHkgXG4xOSA0MSBcbiJ9 -->
+<pre><code>Y
+ x  y 
+19 41 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzdWx0IDwtY2hpc3EudGVzdCh4dClcbnJlc3VsdCBcbmBgYCJ9 -->
+<pre class="r"><code>result &lt;-chisq.test(xt)
+result </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5cdENoaS1zcXVhcmVkIHRlc3QgZm9yIGdpdmVuIHByb2JhYmlsaXRpZXNcblxuZGF0YTogIHh0XG5YLXNxdWFyZWQgPSA4LjA2NjcsIGRmID0gMSwgcC12YWx1ZSA9IDAuMDA0NTA5XG4ifQ== -->
+<pre><code>
+    Chi-squared test for given probabilities
+
+data:  xt
+X-squared = 8.0667, df = 1, p-value = 0.004509</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>The p-value of the test is 7.869e-05, which is less than the significiance level alpha =0.05. We can conclude that the outcomes are not evenly distributed p-value of 7.869e-05.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBhY2Nlc3Mgb2YgdGhlIGV4cGVjdGVkIHZhbHVlXG5yZXN1bHQkZXhwZWN0ZWRcbmBgYCJ9 -->
+<pre class="r"><code># access of the expected value
+result$expected</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiIHggIHkgXG4zMCAzMCBcbiJ9 -->
+<pre><code> x  y 
+30 30 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBhY2Nlc3Mgb2YgdGhlIGV4cGVjdGVkIHZhbHVlXG5yZXN1bHQkcC52YWx1ZVxuYGBgIn0= -->
+<pre class="r"><code># access of the expected value
+result$p.value</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuMDA0NTA4Njk4XG4ifQ== -->
+<pre><code>[1] 0.004508698</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyMgQ2hpLVNxdWFyZWQgcG9zdCBob2MgdGVzdFxuIyB4dCBpcyBhIHRhYmxlIG9mIGNvdW50cyBmb3IgZWFjaCBjYXRlZ29yeSBvZiBZXG5saWJyYXJ5KFJWQWlkZU1lbW9pcmUpICMgZm9yIGNoaXNxLm11bHRjb21wXG5jaGlzcS5tdWx0Y29tcCh4dCwgcC5tZXRob2Q9XCJob2xtXCIpICMgeHQgc2hvd3MgbGV2ZWxzXG4jIGZvciB0aGUgQ2hpLVNxdWFyZWQgdmFsdWVzLCB1c2UgcWNoaXNxKDEtcCwgZGY9MSksIHdoZXJlIHAgaXMgdGhlIHBhaXJ3aXNlIHAtdmFsdWUuXG5gYGAifQ== -->
+<pre class="r"><code>## Chi-Squared post hoc test
+# xt is a table of counts for each category of Y
+library(RVAideMemoire) # for chisq.multcomp
+chisq.multcomp(xt, p.method=&quot;holm&quot;) # xt shows levels
+# for the Chi-Squared values, use qchisq(1-p, df=1), where p is the pairwise p-value.</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>One-sample post hoc tests</p>
+<p>A different kind of post hoc test for one sample. For Y’s response categories (x,y,z), test each proportion against chance.</p>
+<p>Two Samples</p>
+</div>
+<div id="fishers-exact-test" class="section level3">
+<h3>Fisher’s exact test</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBkZiBpcyBhIGxvbmctZm9ybWF0IGRhdGEgdGFibGUgdy9zdWJqZWN0IChTKSwgY2F0ZWdvcmljYWwgZmFjdG9yIChYKSBhbmQgb3V0Y29tZSAoWSlcbmRmIDwtIHJlYWQuY3N2KFwiZGF0YS9Qcm9wb3J0aW9ucy8xRjJMQnNfbXVsdGlub21pYWwuY3N2XCIpXG5oZWFkKGRmKVxuYGBgIn0= -->
+<pre class="r"><code># df is a long-format data table w/subject (S), categorical factor (X) and outcome (Y)
+df &lt;- read.csv(&quot;data/Proportions/1F2LBs_multinomial.csv&quot;)
+head(df)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGYkUyA9IGZhY3RvcihkZiRTKSAjIFN1YmplY3QgaWQgaXMgbm9taW5hbCAodW51c2VkKVxuZGYkWCA9IGZhY3RvcihkZiRYKSAjIFggaXMgYSBmYWN0b3Igb2YgbSDiiaUgMiBsZXZlbHNcbmRmJFkgPSBmYWN0b3IoZGYkWSkgIyBZIGlzIGFuIG91dGNvbWUgb2YgbiDiiaUgMiBjYXRlZ29yaWVzXG5gYGAifQ== -->
+<pre class="r"><code>df$S = factor(df$S) # Subject id is nominal (unused)
+df$X = factor(df$X) # X is a factor of m ≥ 2 levels
+df$Y = factor(df$Y) # Y is an outcome of n ≥ 2 categories</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudW5pcXVlKGRmJFgpXG5gYGAifQ== -->
+<pre class="r"><code>unique(df$X)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiTlVMTFxuIn0= -->
+<pre><code>NULL</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudW5pcXVlKGRmJFkpXG5gYGAifQ== -->
+<pre class="r"><code>unique(df$Y)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIHkgeFxuTGV2ZWxzOiB4IHlcbiJ9 -->
+<pre><code>[1] y x
+Levels: x y</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueHQgPSB4dGFicyggfiBYICsgWSwgZGF0YT1kZikgIyBtYWtlIG0gw5cgbiBjcm9zc3RhYnNcbmBgYCJ9 -->
+<pre class="r"><code>xt = xtabs( ~ X + Y, data=df) # make m × n crosstabs</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>19, 41</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzIDwtIGZpc2hlci50ZXN0KHh0KVxuYGBgIn0= -->
+<pre class="r"><code>res &lt;- fisher.test(xt)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUHJvcG9ydGlvbnMgTm90ZWJvb2siCm91dHB1dDogCiAgbWRfZG9jdW1lbnQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIGhpZ2hsaWdodDogdGFuZ28KICAgIHRoZW1lOiBjZXJ1bGVhbgogICAgdG9jOiB5ZXMKICAgIHRvY19kZXB0aDogNAogICAgdG9jX2Zsb2F0OiB5ZXMKLS0tCgpUaGlzIGxlY3R1cmUgd2FzIHRha2VuIGZyb20gU3RhdGlzdGljYWwgQW5hbHlzaXMgYW5kIFJlcG9ydGluZyBpbiBSLCBKYWNvYiBPLiBXb2Jicm9jaywgUGguRC4KYXZhaWxhYmxlIGhlcmU6IGh0dHA6Ly9kZXB0cy53YXNoaW5ndG9uLmVkdS9hY2VsYWIvcHJvai9Sc3RhdHMvaW5kZXguaHRtbAoKIFByb3BvcnRpb25zLlIKKFRlc3RzIG9mIFByb3BvcnRpb24gJiBBc3NvY2lhdGlvbikKCk9uZSBTYW1wbGUKCgojIyMjIEJpbm9taWFsIHRlc3QKCldoZW4gdG8gdXNlIHRoaXMgdGVzdD8gCgoqTm90ZXMgdGFrZW4gZnJvbSBoZXJlOmh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9V09vUzduVmtmRGsgYnkgTWF0dGhldyBFLkNsYXBoYW0KCipUeXBlIG9mIERhdGEqOiBDYXRlZ29yaWFsLCBvbmx5IGhhdmUgdHdvIGNhdGVnb3JpZXMgaW4gYSBzaW5nbGUgc2FtcGxlCgoqUHVycG9zZSo6IFRvIHRlc3QgaWYgQ2F0ZWdvcnkgaGFzIGFuIGV4cGVjdGVkIGNvdW50KEdvb2RuZXNzIG9mIGZpdCkuCgpUaGUgKmdvb2RuZXNzIG9mIGZpdCogb2YgYSBzdGF0aXN0aWNhbCBtb2RlbCBkZXNjcmliZXMgaG93IHdlbGwgaXQgZml0cyBhIHNldCBvZiBvYnNlcnZhdGlvbnMuIE1lYXN1cmVzIG9mIGdvb2RuZXNzIG9mIGZpdCB0eXBpY2FsbHkgc3VtbWFyaXplIHRoZSBkaXNjcmVwYW5jeSBiZXR3ZWVuIG9ic2VydmVkIHZhbHVlcyBhbmQgdGhlIHZhbHVlcyBleHBlY3RlZCB1bmRlciB0aGUgbW9kZWwgaW4gcXVlc3Rpb24uCgoKYGBge3Igc2V0dXB9Cgprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpCiMgcHVsbCBpbiB0aGUgY3N2CmRmIDwtIHJlYWQuY3N2KCJkYXRhL1Byb3BvcnRpb25zLzBGMExCc19iaW5vbWlhbC5jc3YiKQpkZgpgYGAKIyMjIyMgQ3JlYXRlIGZhY3RvcnMKU3ViamVjdCBpZCBpcyBub21pbmFsIGFuZCBZIGlzIGNhdGVnb3JpY2FsCgpgYGB7ciBmYWN0b3JzfQoKZGYkUyA9IGZhY3RvcihkZiRTKSAjIFN1YmplY3QgaWQgaXMgbm9taW5hbCAodW51c2VkKQpkZiRZID0gZmFjdG9yKGRmJFkpICMgWSBpcyBhbiBvdXRjb21lIG9mIGV4YWN0bHkgdHdvIGNhdGVnb3JpZXMKCmBgYApDb2x1bW4gWSBpcyBtYWRlIHVwIG9mIHR3byB2YWx1ZXM6IGByIHVuaXF1ZShkZiRZKWAKYGBge3IgeHRhYnN9Cnh0ID0geHRhYnMoIH4gWSwgZGF0YT1kZikgIyBtYWtlIGNvdW50cwoKYGBgCmByIHh0YAoKYmlub20udGVzdCAKCkV4YWN0IEJpbm9taWFsIFRlc3QKUGVyZm9ybXMgYW4gZXhhY3QgdGVzdCBvZiBhIHNpbXBsZSBudWxsIGh5cG90aGVzaXMgYWJvdXQgdGhlIHByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgaW4gYSBCZXJub3VsbGkgZXhwZXJpbWVudC4KaHR0cHM6Ly93d3cucmRvY3VtZW50YXRpb24ub3JnL3BhY2thZ2VzL3N0YXRzL3ZlcnNpb25zLzMuMS4xL3RvcGljcy9iaW5vbS50ZXN0CgpgYGB7ciBiaW5vbWlhbF90ZXN0fQpiaW5vbS50ZXN0KHh0LCBwPTAuNSwgYWx0ZXJuYXRpdmU9InR3by5zaWRlZCIpCmBgYAoKCiMjIyMgTXVsdGlub21pYWwgdGVzdAoqVHlwZSBvZiBEYXRhKjogQ2F0ZWdvcmlhbCwgMysgY2F0ZWdvcmllcyBpbiBhIHNpbmdsZSBzYW1wbGUKCipQdXJwb3NlKjogVG8gdGVzdCBpZiBDYXRlZ29yaWVzIG1hdGNoIHdpdGggZXhwZWN0ZWQgY291bnQoR29vZG5lc3Mgb2YgZml0KS4KCldlIHdpbGwgdXNlIHRoZSBYTm9taWFsIGxpYnJhcnkKaHR0cHM6Ly9jcmFuLnItcHJvamVjdC5vcmcvd2ViL3BhY2thZ2VzL1hOb21pYWwvaW5kZXguaHRtbAoKYGBge3IgTXVsdGlub21pYWxfbGlicmFyeX0KIyBkZiBpcyBhIGxvbmctZm9ybWF0IGRhdGEgdGFibGUgdy9jb2x1bW5zIGZvciBzdWJqZWN0IChTKSBhbmQgTi1jYXRlZ29yeSBvdXRjb21lIChZKQppZiAoIXJlcXVpcmUoIlhOb21pYWwiKSkgaW5zdGFsbC5wYWNrYWdlcygiWE5vbWlhbCIpOyAgCmxpYnJhcnkoWE5vbWlhbCkgIyBmb3IgeG11bHRpCmBgYAoKYGBge3IgTXVsdGlub21pYWxfZGF0YXNldH0KZGZfbXVsdGkgPC0gcmVhZC5jc3YoImRhdGEvUHJvcG9ydGlvbnMvMEYwTEJzX211bHRpbm9taWFsLmNzdiIpCmBgYApgYGB7ciBNdWx0aW5vbWlhbF9mYWN0b3J9CmRmX211bHRpJFMgPSBmYWN0b3IoZGYkUykgIyBTdWJqZWN0IGlkIGlzIG5vbWluYWwgKHVudXNlZCkKZGYkWSA9IGZhY3RvcihkZiRZKSAjIFkgaXMgYW4gb3V0Y29tZSBvZiDiiaUyIGNhdGVnb3JpZXMKYGBgCmBgYHtyIE11bHRpbm9taWFsX3RhYnN9Cnh0ID0geHRhYnMoIH4gWSwgZGF0YT1kZikgIyBtYWtlIGNvdW50cwpgYGAKYGBge3IgTXVsdGlub21pYWxfdGVzdH0KeG11bHRpKHh0LCByZXAoMS9sZW5ndGgoeHQpLCBsZW5ndGgoeHQpKSwgc3RhdE5hbWU9IlByb2IiKQpgYGA=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUHJvcG9ydGlvbnMgTm90ZWJvb2siCm91dHB1dDogCiAgaHRtbF9kb2N1bWVudDoKICAgIGhpZ2hsaWdodDogdGFuZ28KICAgIHRoZW1lOiBjZXJ1bGVhbgogICAgdG9jOiB5ZXMKICAgIHRvY19kZXB0aDogNAogICAgdG9jX2Zsb2F0OiB5ZXMKICBtZF9kb2N1bWVudDoKICAgIHRvYzogeWVzCi0tLQoKVGhpcyBsZWN0dXJlIHdhcyB0YWtlbiBmcm9tIFN0YXRpc3RpY2FsIEFuYWx5c2lzIGFuZCBSZXBvcnRpbmcgaW4gUiwgSmFjb2IgTy4gV29iYnJvY2ssIFBoLkQuCmF2YWlsYWJsZSBoZXJlOiBodHRwOi8vZGVwdHMud2FzaGluZ3Rvbi5lZHUvYWNlbGFiL3Byb2ovUnN0YXRzL2luZGV4Lmh0bWwKCiBQcm9wb3J0aW9ucy5SCihUZXN0cyBvZiBQcm9wb3J0aW9uICYgQXNzb2NpYXRpb24pCgpPbmUgU2FtcGxlCgoKIyMjIEJpbm9taWFsIHRlc3QKCldoZW4gdG8gdXNlIHRoaXMgdGVzdD8gCgoqTm90ZXMgdGFrZW4gZnJvbSBoZXJlOmh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9V09vUzduVmtmRGsgYnkgTWF0dGhldyBFLkNsYXBoYW0KCipUeXBlIG9mIERhdGEqOiBDYXRlZ29yaWFsLCBvbmx5IGhhdmUgdHdvIGNhdGVnb3JpZXMgaW4gYSBzaW5nbGUgc2FtcGxlCgoqUHVycG9zZSo6IFRvIHRlc3QgaWYgQ2F0ZWdvcnkgaGFzIGFuIGV4cGVjdGVkIGNvdW50KEdvb2RuZXNzIG9mIGZpdCkuCgpUaGUgKmdvb2RuZXNzIG9mIGZpdCogb2YgYSBzdGF0aXN0aWNhbCBtb2RlbCBkZXNjcmliZXMgaG93IHdlbGwgaXQgZml0cyBhIHNldCBvZiBvYnNlcnZhdGlvbnMuIE1lYXN1cmVzIG9mIGdvb2RuZXNzIG9mIGZpdCB0eXBpY2FsbHkgc3VtbWFyaXplIHRoZSBkaXNjcmVwYW5jeSBiZXR3ZWVuIG9ic2VydmVkIHZhbHVlcyBhbmQgdGhlIHZhbHVlcyBleHBlY3RlZCB1bmRlciB0aGUgbW9kZWwgaW4gcXVlc3Rpb24uCgoKYGBge3Igc2V0dXB9CiMgcHVsbCBpbiB0aGUgY3N2CmRmIDwtIHJlYWQuY3N2KCJkYXRhL1Byb3BvcnRpb25zLzBGMExCc19iaW5vbWlhbC5jc3YiKQpoZWFkKGRmKQpgYGAKIyMjIyMgQ3JlYXRlIGZhY3RvcnMKU3ViamVjdCBpZCBpcyBub21pbmFsIGFuZCBZIGlzIGNhdGVnb3JpY2FsCgpgYGB7ciBmYWN0b3JzfQoKZGYkUyA9IGZhY3RvcihkZiRTKSAjIFN1YmplY3QgaWQgaXMgbm9taW5hbCAodW51c2VkKQpkZiRZID0gZmFjdG9yKGRmJFkpICMgWSBpcyBhbiBvdXRjb21lIG9mIGV4YWN0bHkgdHdvIGNhdGVnb3JpZXMKCmBgYApDb2x1bW4gWSBpcyBtYWRlIHVwIG9mIHR3byB2YWx1ZXM6IGByIHVuaXF1ZShkZiRZKWAKYGBge3IgeHRhYnN9Cnh0ID0geHRhYnMoIH4gWSwgZGF0YT1kZikgIyBtYWtlIGNvdW50cwoKYGBgCmByIHh0YAoKYmlub20udGVzdCAKCkV4YWN0IEJpbm9taWFsIFRlc3QKUGVyZm9ybXMgYW4gZXhhY3QgdGVzdCBvZiBhIHNpbXBsZSBudWxsIGh5cG90aGVzaXMgYWJvdXQgdGhlIHByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgaW4gYSBCZXJub3VsbGkgZXhwZXJpbWVudC4KaHR0cHM6Ly93d3cucmRvY3VtZW50YXRpb24ub3JnL3BhY2thZ2VzL3N0YXRzL3ZlcnNpb25zLzMuMS4xL3RvcGljcy9iaW5vbS50ZXN0CgpgYGB7ciBiaW5vbWlhbF90ZXN0fQpiaW5vbS50ZXN0KHh0LCBwPTAuNSwgYWx0ZXJuYXRpdmU9InR3by5zaWRlZCIpCmBgYAoKCiMjIyBNdWx0aW5vbWlhbCB0ZXN0CipUeXBlIG9mIERhdGEqOiBDYXRlZ29yaWFsLCAzKyBjYXRlZ29yaWVzIGluIGEgc2luZ2xlIHNhbXBsZQoKKlB1cnBvc2UqOiBUbyB0ZXN0IGlmIENhdGVnb3JpZXMgbWF0Y2ggd2l0aCBleHBlY3RlZCBjb3VudChHb29kbmVzcyBvZiBmaXQpLgoKV2Ugd2lsbCB1c2UgdGhlIFhOb21pYWwgbGlicmFyeQpodHRwczovL2NyYW4uci1wcm9qZWN0Lm9yZy93ZWIvcGFja2FnZXMvWE5vbWlhbC9pbmRleC5odG1sCgoKYGBge3IgTXVsdGlub21pYWxfbGlicmFyeX0KIyBkZiBpcyBhIGxvbmctZm9ybWF0IGRhdGEgdGFibGUgdy9jb2x1bW5zIGZvciBzdWJqZWN0IChTKSBhbmQgTi1jYXRlZ29yeSBvdXRjb21lIChZKQppZiAoIXJlcXVpcmUoIlhOb21pYWwiKSkgaW5zdGFsbC5wYWNrYWdlcygiWE5vbWlhbCIpOyAgCmxpYnJhcnkoWE5vbWlhbCkgIyBmb3IgeG11bHRpCgpkZl9tdWx0aSA8LSByZWFkLmNzdigiZGF0YS9Qcm9wb3J0aW9ucy8wRjBMQnNfbXVsdGlub21pYWwuY3N2IikKaGVhZChkZl9tdWx0aSkgCmBgYApgYGB7ciBNdWx0aW5vbWlhbF9mYWN0b3J9CmRmX211bHRpJFMgPSBmYWN0b3IoZGZfbXVsdGkkUykgIyBTdWJqZWN0IGlkIGlzIG5vbWluYWwgKHVudXNlZCkKZGZfbXVsdGkkWSA9IGZhY3RvcihkZl9tdWx0aSRZKSAjIFkgaXMgYW4gb3V0Y29tZSBvZiDiiaUyIGNhdGVnb3JpZXMKeHQgPSB4dGFicyggfiBZLCBkYXRhPWRmX211bHRpKSAjIG1ha2UgY291bnRzCnh0ICMgMyBjYXRlZ29yaWNhbCB2YXJpYWJsZXMKYGBgCmBgYHtyIE11bHRpbm9taWFsX3Rlc3R9CnhtdWx0aSh4dCwgcmVwKDEvbGVuZ3RoKHh0KSwgbGVuZ3RoKHh0KSksIHN0YXROYW1lPSJQcm9iIikKYGBgCmBgYHtyIE11bHRpbm9taWFsX3Rlc3QyfQojIHRoZSBmb2xsb3dpbmcgZ2l2ZXMgdGhlIGVxdWl2YWxlbnQgcmVzdWx0CmlmICghcmVxdWlyZSgiUlZBaWRlTWVtb2lyZSIpKSBpbnN0YWxsLnBhY2thZ2VzKCJSVkFpZGVNZW1vaXJlIik7ICAKbGlicmFyeShSVkFpZGVNZW1vaXJlKSAjIGZvciBtdWx0aW5vbWlhbC50ZXN0CgptdWx0aW5vbWlhbC50ZXN0KGRmX211bHRpJFkpCmBgYApNdWx0aW5vbWlhbCBwb3N0IGhvYyB0ZXN0CmBgYHtyIE11bHRpbm9taWFsX3Bvc3RfaG9jfQojIHh0IGlzIGEgdGFibGUgb2YgY291bnRzIGZvciBlYWNoIGNhdGVnb3J5IG9mIFkKbGlicmFyeShSVkFpZGVNZW1vaXJlKSAjIGZvciBtdWx0aW5vbWlhbC5tdWx0Y29tcAptdWx0aW5vbWlhbC5tdWx0Y29tcCh4dCwgcC5tZXRob2Q9ImhvbG0iKSAjIHh0IHNob3dzIGxldmVscwpgYGAKIyMjIENoaS1zcXVhcmVkIHRlc3QgCgpUaGUgQ2hpLXNxdWFyZSBUZXN0IG9mIEdvb2RuZXNzIG9mIEZpdAoKYGBge3IgTXVsdGlub21pYWxfY2hpX2RhdGF9CiMjIE9uZS1TYW1wbGUgQ2hpLVNxdWFyZWQgdGVzdAojIGRmIGlzIGEgbG9uZy1mb3JtYXQgZGF0YSB0YWJsZSB3L2NvbHVtbnMgZm9yIHN1YmplY3QgKFMpIGFuZCBOLWNhdGVnb3J5IG91dGNvbWUgKFkpCmRmIDwtIHJlYWQuY3N2KCJkYXRhL1Byb3BvcnRpb25zLzBGMExCc19tdWx0aW5vbWlhbC5jc3YiKQpoZWFkKGRmKQpgYGAKCmBgYHtyIE11bHRpbm9taWFsX3RhYn0KZGYkUyA9IGZhY3RvcihkZiRTKSAjIFN1YmplY3QgaWQgaXMgbm9taW5hbCAodW51c2VkKQpkZiRZID0gZmFjdG9yKGRmJFkpICMgWSBpcyBhbiBvdXRjb21lIGZyb20gdHdvIG9yIG1vcmUgY2F0ZWdvcmllcwp4dCA9IHh0YWJzKCB+IFksIGRhdGE9ZGYpICMgbWFrZSBjb3VudHMKeHQKYGBgCgpgYGB7ciBNdWx0aW5vbWlhbF9jaGl9CnJlc3VsdCA8LWNoaXNxLnRlc3QoeHQpCnJlc3VsdCAKYGBgClRoZSBwLXZhbHVlIG9mIHRoZSB0ZXN0IGlzIDcuODY5ZS0wNSwgd2hpY2ggaXMgbGVzcyB0aGFuIHRoZSBzaWduaWZpY2lhbmNlIGxldmVsIGFscGhhID0wLjA1LiBXZSBjYW4gY29uY2x1ZGUgdGhhdCB0aGUgb3V0Y29tZXMgYXJlIG5vdCBldmVubHkgZGlzdHJpYnV0ZWQgcC12YWx1ZSBvZiA3Ljg2OWUtMDUuCmBgYHtyIGNoaV9leHBlY3RlZH0KIyBhY2Nlc3Mgb2YgdGhlIGV4cGVjdGVkIHZhbHVlCnJlc3VsdCRleHBlY3RlZApgYGAKYGBge3IgY2hpX3BfdmFsdWV9CiMgYWNjZXNzIG9mIHRoZSBleHBlY3RlZCB2YWx1ZQpyZXN1bHQkcC52YWx1ZQpgYGAKCmBgYHtyIGNoaV9tdWx0fQojIyBDaGktU3F1YXJlZCBwb3N0IGhvYyB0ZXN0CiMgeHQgaXMgYSB0YWJsZSBvZiBjb3VudHMgZm9yIGVhY2ggY2F0ZWdvcnkgb2YgWQpsaWJyYXJ5KFJWQWlkZU1lbW9pcmUpICMgZm9yIGNoaXNxLm11bHRjb21wCmNoaXNxLm11bHRjb21wKHh0LCBwLm1ldGhvZD0iaG9sbSIpICMgeHQgc2hvd3MgbGV2ZWxzCiMgZm9yIHRoZSBDaGktU3F1YXJlZCB2YWx1ZXMsIHVzZSBxY2hpc3EoMS1wLCBkZj0xKSwgd2hlcmUgcCBpcyB0aGUgcGFpcndpc2UgcC12YWx1ZS4KYGBgCgpPbmUtc2FtcGxlIHBvc3QgaG9jIHRlc3RzCgpBIGRpZmZlcmVudCBraW5kIG9mIHBvc3QgaG9jIHRlc3QgZm9yIG9uZSBzYW1wbGUuIEZvciBZJ3MgcmVzcG9uc2UgY2F0ZWdvcmllcyAoeCx5LHopLCB0ZXN0IGVhY2ggcHJvcG9ydGlvbiBhZ2FpbnN0IGNoYW5jZS4KCgpUd28gU2FtcGxlcwoKIyMjIEZpc2hlcidzIGV4YWN0IHRlc3QKYGBge3IgZmlzaGVyc19kZn0KIyBkZiBpcyBhIGxvbmctZm9ybWF0IGRhdGEgdGFibGUgdy9zdWJqZWN0IChTKSwgY2F0ZWdvcmljYWwgZmFjdG9yIChYKSBhbmQgb3V0Y29tZSAoWSkKZGYgPC0gcmVhZC5jc3YoImRhdGEvUHJvcG9ydGlvbnMvMUYyTEJzX211bHRpbm9taWFsLmNzdiIpCmhlYWQoZGYpCmBgYAoKYGBge3IgZmlzaGVyc19kZl9mYWN0b3J9CmRmJFMgPSBmYWN0b3IoZGYkUykgIyBTdWJqZWN0IGlkIGlzIG5vbWluYWwgKHVudXNlZCkKZGYkWCA9IGZhY3RvcihkZiRYKSAjIFggaXMgYSBmYWN0b3Igb2YgbSDiiaUgMiBsZXZlbHMKZGYkWSA9IGZhY3RvcihkZiRZKSAjIFkgaXMgYW4gb3V0Y29tZSBvZiBuIOKJpSAyIGNhdGVnb3JpZXMKYGBgCgpgYGB7ciBmaXNoZXJzX2xldmVsc30KdW5pcXVlKGRmJFgpCnVuaXF1ZShkZiRZKQoKYGBgCgpgYGB7ciBmaXNoZXJzX3RhYnN9Cnh0ID0geHRhYnMoIH4gWCArIFksIGRhdGE9ZGYpICMgbWFrZSBtIMOXIG4gY3Jvc3N0YWJzCmBgYAoKYHIgeHRgCmBgYHtyIGZpc2hlcnNfdGVzdH0KcmVzIDwtIGZpc2hlci50ZXN0KHh0KQpgYGAK</div>
 
 
 

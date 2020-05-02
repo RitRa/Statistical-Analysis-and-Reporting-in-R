@@ -1,16 +1,17 @@
 ---
 title: "Proportions Notebook"
 output: 
-  md_document:
   html_document:
     highlight: tango
     theme: cerulean
     toc: yes
     toc_depth: 4
     toc_float: yes
+  md_document:
+    toc: yes
 ---
 
-This lecture was taken from Statistical Analysis and Reporting in R, Jacob O. Wobbrock, Ph.D.
+This code was taken from Statistical Analysis and Reporting in R, Jacob O. Wobbrock, Ph.D.
 available here: http://depts.washington.edu/acelab/proj/Rstats/index.html
 
  Proportions.R
@@ -19,7 +20,7 @@ available here: http://depts.washington.edu/acelab/proj/Rstats/index.html
 One Sample
 
 
-#### Binomial test
+### Binomial test
 
 When to use this test? 
 
@@ -33,11 +34,9 @@ The *goodness of fit* of a statistical model describes how well it fits a set of
 
 
 ```{r setup}
-
-knitr::opts_chunk$set(echo = TRUE)
 # pull in the csv
 df <- read.csv("data/Proportions/0F0LBs_binomial.csv")
-df
+head(df)
 ```
 ##### Create factors
 Subject id is nominal and Y is categorical
@@ -66,7 +65,7 @@ binom.test(xt, p=0.5, alternative="two.sided")
 ```
 
 
-#### Multinomial test
+### Multinomial test
 *Type of Data*: Categorial, 3+ categories in a single sample
 
 *Purpose*: To test if Categories match with expected count(Goodness of fit).
@@ -74,22 +73,121 @@ binom.test(xt, p=0.5, alternative="two.sided")
 We will use the XNomial library
 https://cran.r-project.org/web/packages/XNomial/index.html
 
+
 ```{r Multinomial_library}
 # df is a long-format data table w/columns for subject (S) and N-category outcome (Y)
 if (!require("XNomial")) install.packages("XNomial");  
 library(XNomial) # for xmulti
-```
 
-```{r Multinomial_dataset}
 df_multi <- read.csv("data/Proportions/0F0LBs_multinomial.csv")
+head(df_multi) 
 ```
 ```{r Multinomial_factor}
-df_multi$S = factor(df$S) # Subject id is nominal (unused)
-df$Y = factor(df$Y) # Y is an outcome of ≥2 categories
-```
-```{r Multinomial_tabs}
-xt = xtabs( ~ Y, data=df) # make counts
+df_multi$S = factor(df_multi$S) # Subject id is nominal (unused)
+df_multi$Y = factor(df_multi$Y) # Y is an outcome of ≥2 categories
+xt = xtabs( ~ Y, data=df_multi) # make counts
+xt # 3 categorical variables
 ```
 ```{r Multinomial_test}
 xmulti(xt, rep(1/length(xt), length(xt)), statName="Prob")
 ```
+```{r Multinomial_test2}
+# the following gives the equivalent result
+if (!require("RVAideMemoire")) install.packages("RVAideMemoire");  
+library(RVAideMemoire) # for multinomial.test
+
+multinomial.test(df_multi$Y)
+```
+Multinomial post hoc test
+```{r Multinomial_post_hoc}
+# xt is a table of counts for each category of Y
+library(RVAideMemoire) # for multinomial.multcomp
+multinomial.multcomp(xt, p.method="holm") # xt shows levels
+```
+### Chi-squared test 
+
+The Chi-square Test of Goodness of Fit
+
+```{r Multinomial_chi_data}
+## One-Sample Chi-Squared test
+# df is a long-format data table w/columns for subject (S) and N-category outcome (Y)
+df <- read.csv("data/Proportions/0F0LBs_multinomial.csv")
+head(df)
+```
+
+```{r Multinomial_tab}
+df$S = factor(df$S) # Subject id is nominal (unused)
+df$Y = factor(df$Y) # Y is an outcome from two or more categories
+xt = xtabs( ~ Y, data=df) # make counts
+xt
+```
+
+```{r Multinomial_chi}
+result <-chisq.test(xt)
+result 
+```
+The p-value of the test is 7.869e-05, which is less than the significiance level alpha =0.05. We can conclude that the outcomes are not evenly distributed p-value of 7.869e-05.
+```{r chi_expected}
+# access of the expected value
+result$expected
+```
+```{r chi_p_value}
+# access of the expected value
+result$p.value
+```
+
+```{r chi_mult}
+## Chi-Squared post hoc test
+# xt is a table of counts for each category of Y
+library(RVAideMemoire) # for chisq.multcomp
+chisq.multcomp(xt, p.method="holm") # xt shows levels
+# for the Chi-Squared values, use qchisq(1-p, df=1), where p is the pairwise p-value.
+```
+
+One-sample post hoc tests
+
+A different kind of post hoc test for one sample. For Y's response categories (x,y,z), test each proportion against chance.
+
+
+Two Samples
+
+### Fisher's exact test
+```{r fishers_df}
+# df is a long-format data table w/subject (S), categorical factor (X) and outcome (Y)
+df <- read.csv("data/Proportions/1F2LBs_multinomial.csv")
+head(df)
+```
+
+```{r fishers_df_factor}
+df$S = factor(df$S) # Subject id is nominal (unused)
+df$X = factor(df$X) # X is a factor of m ≥ 2 levels
+df$Y = factor(df$Y) # Y is an outcome of n ≥ 2 categories
+```
+
+```{r fishers_levels}
+unique(df$X)
+unique(df$Y)
+
+```
+
+```{r fishers_tabs}
+xt = xtabs( ~ X + Y, data=df) # make m × n crosstabs
+xt
+```
+
+
+```{r fishers_test}
+res <- fisher.test(xt)
+res
+```
+
+```{r fishers_post}
+## Fisher's post hoc test
+# xt is an m × n crosstabs with categories X and Y
+library(RVAideMemoire) # for fisher.multcomp
+fisher.multcomp(xt, p.method="holm")
+```
+References: 
+
+http://www.sthda.com/english/wiki/comparing-proportions-in-r
+http://www.sthda.com/english/wiki/chi-square-goodness-of-fit-test-in-r#what-is-chi-square-goodness-of-fit-test
